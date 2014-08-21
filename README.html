@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Repository Files</title>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>This repository is a requirement for Course Project of the Coursera course &ldquo;Getting and Cleaning Data&rdquo;.</p>
+
+<p>This README explains how all of the scripts in the repository work and how they are connected.</p>
+
+<h2>Repository Files</h2>
+
+<p>There is one R script in this repository <strong>run_analysis.R</strong>. This script creates two tidy data sets:</p>
+
+<ul>
+<li><strong>UCI_HAR_DataExtract.txt</strong><br/></li>
+<li><strong>UCI_HAR_DataSummary.txt</strong></li>
+</ul>
+
+<p>The script run<em>analysis.R requires that the dataset folder __UCI_HAR_Dataset</em>_ be in the working directory  </p>
+
+<p>There are two R markkdown files which produce the .md and .pdf formats:  </p>
+
+<ul>
+<li><strong>CodeBook.Rmd</strong><br/></li>
+<li><strong>README.Rmd</strong><br/></li>
+</ul>
+
+<h2>run_analysis.R Details</h2>
+
+<ol>
+<li><p>Merges the training and the test sets to create one data set. The following files are merged and added to the data frame named x.</p>
+
+<ul>
+<li>train/X_train.txt</li>
+<li>test/X_test.txt</li>
+<li>train/y_train.txt</li>
+<li>test/y_test.txt</li>
+<li>train/subject_train.txt</li>
+<li>test/subject_test.txt</li>
+</ul></li>
+<li><p>Appropriately labels the data set with descriptive variable names. The data in the y and test files is named &#39;Activity&#39; and the subject data is named Subject. The x column labels are read in from the file <strong>features.txt</strong> and are cleaned up to make them easier to work with.</p></li>
+<li><p>Uses descriptive activity names to name the activities in the data set. These are hard-coded from the information contained in the file activity_labels.txt. </p>
+
+<ol>
+<li>WALKING</li>
+<li>WALKING_UPSTAIRS</li>
+<li>WALKING_DOWNSTAIRS</li>
+<li>SITTING</li>
+<li>STANDING</li>
+<li> LAYING</li>
+</ol></li>
+<li><p>The script extracts only the measurements on the mean and standard deviation for each measurement to create a data frame named <strong>dataExtract</strong>.  The output file is <strong>UCI_HAR_DataExtract.txt</strong>.</p></li>
+</ol>
+
+<p>The values:</p>
+
+<ul>
+<li>mean(): Mean value</li>
+<li>std(): Standard deviation</li>
+</ul>
+
+<p>The variables:</p>
+
+<ul>
+<li>tBodyAcc-XYZ</li>
+<li>tGravityAcc-XYZ</li>
+<li>tBodyAccJerk-XYZ</li>
+<li>tBodyGyro-XYZ</li>
+<li>tBodyGyroJerk-XYZ</li>
+<li>tBodyAccMag</li>
+<li>tGravityAccMag</li>
+<li>tBodyAccJerkMag</li>
+<li>tBodyGyroMag</li>
+<li>tBodyGyroJerkMag</li>
+<li>fBodyAcc-XYZ</li>
+<li>fBodyAccJerk-XYZ</li>
+<li>fBodyGyro-XYZ</li>
+<li>fBodyAccMag</li>
+<li>fBodyAccJerkMag</li>
+<li>fBodyGyroMag</li>
+<li>fBodyGyroJerkMag</li>
+<li>Activity</li>
+<li>Subject</li>
+</ul>
+
+<ol>
+<li>Creates a second, independent tidy data set with the average of each variable for each activity and each subject. This data frame is named dataSummary and output file is <strong>UCI_HAR_DataSummary.txt</strong>.</li>
+</ol>
+
+</body>
+
+</html>

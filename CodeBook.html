@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Getting the data</title>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>This is a code book that describes the variables, the data, and any transformations or work performed to clean up the data. </p>
+
+<h2>Getting the data</h2>
+
+<p>The data was downloaded via Safari browser from <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a> and unzipped automatically to a folder named &ldquo;UCI HAR Dataset&rdquo;. The folder was renamed to &ldquo;UCI_HAR_Dataset&rdquo; for convenience.</p>
+
+<h2>Merging the Data</h2>
+
+<ol>
+<li>The training and text data for X (data values) are merged in the following order:</li>
+</ol>
+
+<pre><code>* train/X_train.txt
+* test/X_test.txt
+</code></pre>
+
+<ol>
+<li>The training and text data for y (activities) are merged in the following order:</li>
+</ol>
+
+<pre><code>* train/y_train.txt
+* test/y_test.txt
+</code></pre>
+
+<ol>
+<li>The training and text data for subjects are merged in the following order:</li>
+</ol>
+
+<pre><code>* train/subject_train.txt
+* test/subject_test.txt
+</code></pre>
+
+<h2>Meaningful Names</h2>
+
+<p>The data in the y and test files is named &#39;Activity&#39; and the subject data is named &#39;Subject&#39;. The x column labels are read in from the file <strong>features.txt</strong> and are cleaned up to make them easier to work with.</p>
+
+<p>The substitutions are:</p>
+
+<table><thead>
+<tr>
+<th>Find</th>
+<th>Replace</th>
+<th>Reason</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>open bracket</td>
+<td>empty</td>
+<td>Cleaner for working with column names</td>
+</tr>
+<tr>
+<td>close bracket</td>
+<td>empty</td>
+<td>Cleaner for working with column names</td>
+</tr>
+<tr>
+<td>comma</td>
+<td>underscore</td>
+<td>Cleaner for working with column names</td>
+</tr>
+<tr>
+<td>dash</td>
+<td>underscore</td>
+<td>Cleaner for working with column names</td>
+</tr>
+<tr>
+<td>meanFreq</td>
+<td>MeanFreq</td>
+<td>So as not to pick up when using grep &#39;mean&#39; for column names</td>
+</tr>
+<tr>
+<td>mean_X</td>
+<td>X_mean</td>
+<td>For easier sorting</td>
+</tr>
+<tr>
+<td>mean_Y</td>
+<td>Y_mean</td>
+<td>For easier sorting</td>
+</tr>
+<tr>
+<td>mean_Z</td>
+<td>Z_mean</td>
+<td>For easier sorting</td>
+</tr>
+<tr>
+<td>std_X</td>
+<td>X_std</td>
+<td>For easier sorting</td>
+</tr>
+<tr>
+<td>std_Y</td>
+<td>Y_std</td>
+<td>For easier sorting</td>
+</tr>
+<tr>
+<td>std_Z</td>
+<td>Z_std</td>
+<td>For easier sorting</td>
+</tr>
+</tbody></table>
+
+<p>Descriptive activity names are used to name the activities in the data set. These are hard-coded from the information contained in the file activity_labels.txt, as follows: </p>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Substitution</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>WALKING</td>
+</tr>
+<tr>
+<td>2</td>
+<td>WALKING_UPSTAIRS</td>
+</tr>
+<tr>
+<td>3</td>
+<td>WALKING_DOWNSTAIRS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>SITTING</td>
+</tr>
+<tr>
+<td>5</td>
+<td>STANDING</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LAYING</td>
+</tr>
+</tbody></table>
+
+<h2>Tidy dataset 1 - dataExtract</h2>
+
+<p>Measurements on the mean and standard deviation for each measurement are extracted from the data frame named <strong>x</strong> to create a data frame named <strong>dataExtract</strong>.  The output file is <strong>UCI_HAR_DataExtract.txt</strong>. All the variables are numerical apart from Activity and Subject:</p>
+
+<pre><code> Activity
+ Factor w/ 6 levels &quot;WALKING&quot;,&quot;WALKING_UPSTAIRS&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+
+ Subject
+ int [1:10299] 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre>
+
+<p>The numerical variable names are:</p>
+
+<pre><code>[1]  &quot;fBodyAcc_X_mean&quot;           &quot;fBodyAcc_X_std&quot;            &quot;fBodyAcc_Y_mean&quot;          
+[4]  &quot;fBodyAcc_Y_std&quot;            &quot;fBodyAcc_Z_mean&quot;           &quot;fBodyAcc_Z_std&quot;           
+[7]  &quot;fBodyAccJerk_X_mean&quot;       &quot;fBodyAccJerk_X_std&quot;        &quot;fBodyAccJerk_Y_mean&quot;      
+[10] &quot;fBodyAccJerk_Y_std&quot;        &quot;fBodyAccJerk_Z_mean&quot;       &quot;fBodyAccJerk_Z_std&quot;       
+[13] &quot;fBodyAccMag_mean&quot;          &quot;fBodyAccMag_std&quot;           &quot;fBodyBodyAccJerkMag_mean&quot; 
+[16] &quot;fBodyBodyAccJerkMag_std&quot;   &quot;fBodyBodyGyroJerkMag_mean&quot; &quot;fBodyBodyGyroJerkMag_std&quot; 
+[19] &quot;fBodyBodyGyroMag_mean&quot;     &quot;fBodyBodyGyroMag_std&quot;      &quot;fBodyGyro_X_mean&quot;         
+[22] &quot;fBodyGyro_X_std&quot;           &quot;fBodyGyro_Y_mean&quot;          &quot;fBodyGyro_Y_std&quot;          
+[25] &quot;fBodyGyro_Z_mean&quot;          &quot;fBodyGyro_Z_std&quot;           &quot;tBodyAcc_X_mean&quot;          
+[28] &quot;tBodyAcc_X_std&quot;            &quot;tBodyAcc_Y_mean&quot;           &quot;tBodyAcc_Y_std&quot;           
+[31] &quot;tBodyAcc_Z_mean&quot;           &quot;tBodyAcc_Z_std&quot;            &quot;tBodyAccJerk_X_mean&quot;      
+[34] &quot;tBodyAccJerk_X_std&quot;        &quot;tBodyAccJerk_Y_mean&quot;       &quot;tBodyAccJerk_Y_std&quot;       
+[37] &quot;tBodyAccJerk_Z_mean&quot;       &quot;tBodyAccJerk_Z_std&quot;        &quot;tBodyAccJerkMag_mean&quot;     
+[40] &quot;tBodyAccJerkMag_std&quot;       &quot;tBodyAccMag_mean&quot;          &quot;tBodyAccMag_std&quot;          
+[43] &quot;tBodyGyro_X_mean&quot;          &quot;tBodyGyro_X_std&quot;           &quot;tBodyGyro_Y_mean&quot;         
+[46] &quot;tBodyGyro_Y_std&quot;           &quot;tBodyGyro_Z_mean&quot;          &quot;tBodyGyro_Z_std&quot;          
+[49] &quot;tBodyGyroJerk_X_mean&quot;      &quot;tBodyGyroJerk_X_std&quot;       &quot;tBodyGyroJerk_Y_mean&quot;     
+[52] &quot;tBodyGyroJerk_Y_std&quot;       &quot;tBodyGyroJerk_Z_mean&quot;      &quot;tBodyGyroJerk_Z_std&quot;      
+[55] &quot;tBodyGyroJerkMag_mean&quot;     &quot;tBodyGyroJerkMag_std&quot;      &quot;tBodyGyroMag_mean&quot;        
+[58] &quot;tBodyGyroMag_std&quot;          &quot;tGravityAcc_X_mean&quot;        &quot;tGravityAcc_X_std&quot;        
+[61] &quot;tGravityAcc_Y_mean&quot;        &quot;tGravityAcc_Y_std&quot;         &quot;tGravityAcc_Z_mean&quot;       
+[64] &quot;tGravityAcc_Z_std&quot;         &quot;tGravityAccMag_mean&quot;       &quot;tGravityAccMag_std&quot;       
+[67] &quot;Activity&quot;                  &quot;Subject&quot; 
+</code></pre>
+
+<h2>Tidy dataset 2 - dataSummary</h2>
+
+<p>A second, independent tidy data set is created with the average of each variable for each activity and each subject. This data frame is named dataSummary and output file is <strong>UCI_HAR_DataSummary.txt</strong>.</p>
+
+<p>The reshape2 library melt function was used to transform the data into a long narrow format. This resulted in 4 variables:</p>
+
+<pre><code>&#39;data.frame&#39;:    679734 obs. of  4 variables:
+ $ Subject : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ Activity: Factor w/ 6 levels &quot;WALKING&quot;,&quot;WALKING_UPSTAIRS&quot;,..: 5 5 5 5 5 5 5 5 5 5 ...
+ $ variable: Factor w/ 66 levels &quot;fBodyAcc_X_mean&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ value   : num  -0.995 -0.997 -0.994 -0.995 -0.997 ...
+</code></pre>
+
+<p>Next, the with and tapply functions were used to create a multi-dimensional array for Activity, Subject and variable.</p>
+
+<pre><code> num [1:6, 1:30, 1:66] -0.2028 -0.4043 0.0382 -0.9796 -0.9952 ...
+ - attr(*, &quot;dimnames&quot;)=List of 3
+  ..$ : chr [1:6] &quot;WALKING&quot; &quot;WALKING_UPSTAIRS&quot; &quot;WALKING_DOWNSTAIRS&quot; &quot;SITTING&quot; ...
+  ..$ : chr [1:30] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+  ..$ : chr [1:66] &quot;fBodyAcc_X_mean&quot; &quot;fBodyAcc_X_std&quot; &quot;fBodyAcc_Y_mean&quot; &quot;fBodyAcc_Y_std&quot; ...
+</code></pre>
+
+<p>The final dataSummary data frame was created from the array to result in the following structure:</p>
+
+<pre><code>&#39;data.frame&#39;:    11880 obs. of  4 variables:
+ $ Activity: Factor w/ 6 levels &quot;WALKING&quot;,&quot;WALKING_UPSTAIRS&quot;,..: 1 2 3 4 5 6 1 2 3 4 ...
+ $ Subject : num  1 1 1 1 1 1 2 2 2 2 ...
+ $ Feature : Factor w/ 66 levels &quot;fBodyAcc_X_mean&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Mean    : num  -0.2028 -0.4043 0.0382 -0.9796 -0.9952 ...
+</code></pre>
+
+<p>Finally, the two datasets are written to files with write.table and row.name as FALSE:</p>
+
+<ul>
+<li>UCI_HAR_DataExtract.txt</li>
+<li>UCI_HAR_DataSummary.txt</li>
+</ul>
+
+</body>
+
+</html>
